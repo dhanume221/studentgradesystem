@@ -79,8 +79,8 @@ const updateStudent = async (req, res) => {
     try {
         const { grade } = req.body;
         const remarks = generateRemarks(grade);
-        const student = await Student.findOneAndUpdate(
-            { studentKey: req.params.id },
+        const student = await Student.findByIdAndUpdate(
+            req.params.id,
             { grade, remarks },
             { new: true }
         );
@@ -92,7 +92,7 @@ const updateStudent = async (req, res) => {
 
 const deleteStudent = async (req, res) => {
     try {
-        await Student.findOneAndDelete({ studentKey: req.params.id });
+        await Student.findByIdAndDelete(req.params.id);
         res.json({ message: 'Student deleted' });
     } catch (error) {
         res.status(500).json({ error: error.message });
