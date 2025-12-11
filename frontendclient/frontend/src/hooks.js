@@ -43,13 +43,23 @@ export const useStudents = () => {
       body: JSON.stringify(studentData)
     });
     const updatedStudent = await response.json();
-    setStudents(prev => prev.map(s => s._id === id ? updatedStudent : s));
+    console.log('PUT status', response.status, 'body', updatedStudent); // debug
+
+    if (!response.ok) {
+      alert(
+        'Update failed: ' + (updatedStudent.message || response.status)
+      );
+      return;
+    }
+
+    setStudents((prev) =>
+      prev.map((s) => (s._id === id ? updatedStudent : s))
+    );
   };
 
   const deleteStudent = async (id) => {
     await fetch(`${API_BASE_URL}/api/students/${id}`, { method: 'DELETE' });
     setStudents(prev => prev.filter(s => s._id !== id));
   };
-
   return { students, createStudent, updateStudent, deleteStudent, refetch: fetchStudents };
 };

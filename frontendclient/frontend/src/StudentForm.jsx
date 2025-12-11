@@ -69,7 +69,7 @@ const StudentForm = () => {
           max="100"
           required
         />
-        <button type="submit">{editingId ? 'Update' : 'Add Student'}</button>
+        <button type="submit" style={{ width: '200px', alignContent: 'center', justifyContent: 'center', marginLeft: "320px", marginTop: "20px" }}>{editingId ? 'Update' : 'Add Student'}</button>
       </form>
     </section>
   );

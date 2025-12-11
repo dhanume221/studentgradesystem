@@ -10,6 +10,16 @@
   box-shadow: 0 0 10px #add8f5ff;
 }
 
+.delete-btn {
+  background-color: #eb2236;
+  color: white;
+  width: 90px;
+}
+
+.delete-btn:hover {
+  background-color: #cc0b1e;
+}
+
 .app-header {
   color: #add8f5ff;
   font-size: 2rem;
@@ -20,8 +30,18 @@
 
 .controls input {
   background-color: rgb(16, 38, 53, 0.8);
-  padding: 10px;
+  padding: 2px;
   box-shadow: 0 0 5px #add8f5ff;
+  border: 1px solid #1daad5;
+  border-radius: 5px;
+}
+
+
+
+.edit-input {
+  background-color: transparent;
+  padding: 10px;
+  box-shadow: 0 0 1px #add8f5ff;
   border: 1px solid #1daad5;
   border-radius: 5px;
 }
@@ -59,6 +79,26 @@
   border-radius: 5px;
 }
 
+.search-input {
+  background-color: rgb(16, 38, 53, 0.8);
+  padding: 10px;
+  box-shadow: 0 0 5px #add8f5ff;
+  border: 1px solid #1daad5;
+  border-radius: 5px;
+  width: 200px;
+  height: 30px;
+}
+
+
+.edit-btn {
+  margin-right: 5px;
+  ;
+}
+
+.save-btn {
+  margin-left: 5px;
+}
+
 .student-form select {
   padding: 10px;
   color: #032343;
@@ -71,42 +111,33 @@
 
 .table-wrapper::-webkit-scrollbar {
   width: 8px;
-  /* thickness of side bar */
 }
 
-/* track (background) */
 .table-wrapper::-webkit-scrollbar-track {
   background: #111827;
-  /* dark background */
 }
 
-/* thumb (draggable part) */
 .table-wrapper::-webkit-scrollbar-thumb {
   background-color: #4b5563;
-  /* gray thumb */
   border-radius: 999px;
-  /* fully rounded */
   border: 2px solid #111827;
-  /* space around thumb */
 }
 
-/* thumb on hover */
 .table-wrapper::-webkit-scrollbar-thumb:hover {
   background-color: #9ca3af;
 }
 
 .table-wrapper {
   max-height: 400px;
-  /* Increased height for better visibility */
+  width: 100%;
   overflow-y: auto;
   overflow-x: auto;
-  /* Enable horizontal scroll on small screens */
   border-radius: 10px;
   background-color: #032343;
 }
 
 .grades-table {
-  width: 100%;
+  width: 900px;
   border-collapse: collapse;
   margin-top: 10px;
 }
@@ -115,6 +146,7 @@
 .grades-table td {
   padding: 12px;
   text-align: left;
+  padding-left: 20px;
 }
 
 .grades-table th {
@@ -141,7 +173,6 @@
   justify-content: center;
 }
 
-.search-input,
 .filter-select {
   padding: 10px;
   border: 1px solid #ddd;
