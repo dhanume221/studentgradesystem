@@ -33,17 +33,23 @@ body {
   margin: 0;
   background-image: url("/educationbg.jpg");
   background-size: cover;
+  background-attachment: fixed;
   display: flex;
-  place-items: center;
   justify-content: center;
-  color: #add8f5ff;
-  min-width: 320px;
+  align-items: flex-start;
+  /* Changed from center to allow scrolling on small screens */
   min-height: 100vh;
+  color: #add8f5ff;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 20px 0;
+  /* Add some vertical padding */
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2.5em;
+  /* Reduced from 3.2em for better mobile fit */
   line-height: 1.1;
+  text-align: center;
 }
 
 button {

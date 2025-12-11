@@ -19,7 +19,7 @@ const StudentView = () => {
 
       {/* Search and Filter */}
       <div className="controls">
-        <label style={{ marginTop: "5px" }}>Student Name:</label>
+        <label className="control-label">Student Name:</label>
         <div className="search-box">
           <input
             placeholder="Search by student name..."
@@ -29,7 +29,7 @@ const StudentView = () => {
           />
         </div>
 
-        <label style={{ marginTop: "5px" }}>Status:</label>
+        <label className="control-label">Status:</label>
         <select value={filter} onChange={(e) => setFilter(e.target.value)} className="filter-select">
           <option value="All" className="opt-all">All Students</option>
           <option value="PASS" className="opt-pass">Pass Students Only</option>

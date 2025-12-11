@@ -36,7 +36,7 @@ const StudentForm = () => {
 
   return (
     <section className="crud-section">
-      <h2 style={{ marginLeft: "10px" }}>Add Grade Details</h2>
+      <h2 className="section-title">Add Grade Details</h2>
       <form onSubmit={handleSubmit} className="student-form">
         <input
           placeholder="Student Key"

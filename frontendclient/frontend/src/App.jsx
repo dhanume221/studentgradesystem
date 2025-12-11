@@ -8,7 +8,7 @@ function App() {
     <div className="app">
 
       <header>
-        <h2 style={{ color: "#add8f5ff", fontSize: "2rem", fontWeight: "bold", textAlign: "center" }}>Student Grade Management</h2>
+        <h2 className="app-header">Student Grade Management</h2>
       </header>
       <main>
         <StudentForm />
