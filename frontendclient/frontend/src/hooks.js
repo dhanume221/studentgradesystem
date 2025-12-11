@@ -58,8 +58,19 @@ export const useStudents = () => {
   };
 
   const deleteStudent = async (id) => {
-    await fetch(`${API_BASE_URL}/api/students/${id}`, { method: 'DELETE' });
-    setStudents(prev => prev.filter(s => s._id !== id));
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/students/${id}`, { method: 'DELETE' });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        alert('Delete failed: ' + (errorData.error || response.status));
+        return;
+      }
+
+      setStudents(prev => prev.filter(s => s._id !== id));
+    } catch (error) {
+      alert('Delete error: ' + error.message);
+    }
   };
   return { students, createStudent, updateStudent, deleteStudent, refetch: fetchStudents };
 };
