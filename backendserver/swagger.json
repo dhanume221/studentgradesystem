@@ -1,0 +1,227 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Student Data API",
+    "version": "1.0.0",
+    "description": "API for managing student data and subjects"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/api/students": {
+      "get": {
+        "summary": "Get all students",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search by student name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of students",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Student"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new student",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Student created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/students/{id}": {
+      "put": {
+        "summary": "Update a student",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "grade": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "grade"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Student updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a student",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Student deleted"
+          }
+        }
+      }
+    },
+    "/api/subjects": {
+      "get": {
+        "summary": "Get all subjects",
+        "responses": {
+          "200": {
+            "description": "List of subjects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Subject"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/setup": {
+      "post": {
+        "summary": "Setup database with default subjects",
+        "responses": {
+          "200": {
+            "description": "Database setup complete"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StudentInput": {
+        "type": "object",
+        "properties": {
+          "studentKey": {
+            "type": "string"
+          },
+          "studentName": {
+            "type": "string"
+          },
+          "subjectKey": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "studentKey",
+          "studentName",
+          "subjectKey",
+          "grade"
+        ]
+      },
+      "Student": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "studentKey": {
+            "type": "string"
+          },
+          "studentName": {
+            "type": "string"
+          },
+          "subjectKey": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "number"
+          },
+          "remarks": {
+            "type": "string"
+          }
+        }
+      },
+      "Subject": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "subjectKey": {
+            "type": "string"
+          },
+          "subjectName": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
