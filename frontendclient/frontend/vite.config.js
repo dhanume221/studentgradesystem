@@ -13,11 +13,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://studentgradesystem.onrender.com',
+        target: 'http://localhost:5000',
         changeOrigin: true,
       },
       '/images': {
-        target: 'https://studentgradesystem.onrender.com',
+        target: 'http://localhost:5000',
         changeOrigin: true,
       }
     }
