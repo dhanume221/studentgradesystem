@@ -21,7 +21,18 @@ export const useStudents = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(studentData)
     });
+
     const newStudent = await response.json();
+
+    if (!response.ok) {
+      if (newStudent.error === 'DUPLICATE') {
+        alert("Student already exists");
+      } else {
+        alert("Error creating student: " + (newStudent.error || 'Unknown error'));
+      }
+      return;
+    }
+
     setStudents(prev => [...prev, newStudent]);
   };
 

@@ -56,14 +56,10 @@ const createStudent = async (req, res) => {
         const subkey = subjectKey.toUpperCase();
         const checking = await Student.findOne({ studentKey });
         if (checking) {
-            alert("Student already exists");
-            return res.status(400).json({ error: 'Student already exists' });
+
+            return res.status(400).json({ error: 'DUPLICATE' });
         }
-        const subcheck = await Subject.findOne({ subjectKey: subkey });
-        if (!subcheck) {
-            alert("Subject does not exist");
-            return res.status(400).json({ error: 'Subject does not exist' });
-        }
+
         const student = new Student({
             studentKey,
             studentName,
