@@ -6,7 +6,7 @@ export const useStudents = () => {
 
   const fetchStudents = async (search = '', filter = 'All') => {
     const params = new URLSearchParams({ search, remarks: filter });
-    const response = await fetch(`${API_BASE_URL}/api/students?${params}`);
+    const response = await fetch(`${API_BASE_URL}/api/students/getstudents?${params}`);
     const data = await response.json();
     setStudents(data);
   };
@@ -16,7 +16,7 @@ export const useStudents = () => {
   }, []);
 
   const createStudent = async (studentData) => {
-    const response = await fetch(`${API_BASE_URL}/api/students`, {
+    const response = await fetch(`${API_BASE_URL}/api/students/addstudent`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(studentData)
@@ -37,7 +37,7 @@ export const useStudents = () => {
   };
 
   const updateStudent = async (id, studentData) => {
-    const response = await fetch(`${API_BASE_URL}/api/students/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/students/updatestudent/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(studentData)
@@ -59,7 +59,7 @@ export const useStudents = () => {
 
   const deleteStudent = async (id) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/students/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${API_BASE_URL}/api/students/deletestudent/${id}`, { method: 'DELETE' });
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
