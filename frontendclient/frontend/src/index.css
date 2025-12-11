@@ -31,7 +31,7 @@ a:hover {
 
 body {
   margin: 0;
-  background-image: url("./educationbg.jpg");
+  background-image: url("/educationbg.jpg");
   background-size: cover;
   display: flex;
   place-items: center;
