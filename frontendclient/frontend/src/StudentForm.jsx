@@ -52,8 +52,8 @@ const StudentForm = () => {
           value={formData.studentName}
           onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
           required
-          pattern="^[^0-9]+$"
-          title="Student Name should not contain numbers."
+          pattern="^[a-zA-Z\s]+$"
+          title="Student Name must only contain alphabets."
         />
         <select
           value={formData.subjectKey}
