@@ -5,10 +5,16 @@ export const useStudents = () => {
   const [students, setStudents] = useState([]);
 
   const fetchStudents = async (search = '', filter = 'All') => {
-    const params = new URLSearchParams({ search, remarks: filter });
-    const response = await fetch(`${API_BASE_URL}/api/students/getstudents?${params}`);
-    const data = await response.json();
-    setStudents(data);
+    try {
+      const params = new URLSearchParams({ search, remarks: filter });
+      const response = await fetch(`${API_BASE_URL}/api/students/getstudents?${params}`);
+      if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
+      const data = await response.json();
+      setStudents(data);
+    } catch (error) {
+      console.error("Fetch error:", error);
+      // Optional: alert or set error state
+    }
   };
 
   useEffect(() => {
@@ -16,45 +22,51 @@ export const useStudents = () => {
   }, []);
 
   const createStudent = async (studentData) => {
-    const response = await fetch(`${API_BASE_URL}/api/students/addstudent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(studentData)
-    });
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/students/addstudent`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(studentData)
+      });
 
-    const newStudent = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
-      if (newStudent.error === 'DUPLICATE') {
-        alert("Student already exists");
-      } else {
-        alert("Error creating student: " + (newStudent.error || 'Unknown error'));
+      if (!response.ok) {
+        if (data.error === 'DUPLICATE') {
+          alert("Student already exists");
+        } else {
+          alert("Error creating student: " + (data.error || response.status));
+        }
+        return;
       }
-      return;
-    }
 
-    setStudents(prev => [...prev, newStudent]);
+      setStudents(prev => [...prev, data]);
+    } catch (error) {
+      alert("Network or Server Error: " + error.message);
+    }
   };
 
   const updateStudent = async (id, studentData) => {
-    const response = await fetch(`${API_BASE_URL}/api/students/updatestudent/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(studentData)
-    });
-    const updatedStudent = await response.json();
-    console.log('PUT status', response.status, 'body', updatedStudent); // debug
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/students/updatestudent/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(studentData)
+      });
 
-    if (!response.ok) {
-      alert(
-        'Update failed: ' + (updatedStudent.message || response.status)
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        alert('Update failed: ' + (errorData.error || response.status));
+        return;
+      }
+
+      const updatedStudent = await response.json();
+      setStudents((prev) =>
+        prev.map((s) => (s._id === id ? updatedStudent : s))
       );
-      return;
+    } catch (error) {
+      alert('Update error: ' + error.message);
     }
-
-    setStudents((prev) =>
-      prev.map((s) => (s._id === id ? updatedStudent : s))
-    );
   };
 
   const deleteStudent = async (id) => {

@@ -43,12 +43,17 @@ const StudentForm = () => {
           value={formData.studentKey}
           onChange={(e) => setFormData({ ...formData, studentKey: e.target.value })}
           required
+          maxLength="7"
+          pattern="\d*"
+          title="Student Key must be up to 7 digits."
         />
         <input
           placeholder="Student Name"
           value={formData.studentName}
           onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
           required
+          pattern="^[^0-9]+$"
+          title="Student Name should not contain numbers."
         />
         <select
           value={formData.subjectKey}
